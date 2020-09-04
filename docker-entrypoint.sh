@@ -36,6 +36,11 @@ if [ -z "$INPUT_STACK_FILE_NAME" ]; then
   INPUT_STACK_FILE_NAME=docker-compose.yaml
 fi
 
+if [ -z "$INPUT_STACK_FILE_NAME" ]; then
+  INPUT_DEPLOYMENT_COMMAND_OPTIONS=""
+fi
+
+
 if [ -z "$INPUT_KEEP_FILES" ]; then
   INPUT_KEEP_FILES=4
 else
