@@ -38,6 +38,9 @@ inputs:
   pull_images_first:
     description: Pull docker images before deploying.
     required: false
+  deployment_command_options:
+    description: Options to docker-compose.
+    required: false
 
 runs:
   using: docker
