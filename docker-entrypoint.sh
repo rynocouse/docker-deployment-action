@@ -49,7 +49,7 @@ DEPLOYMENT_COMMAND_OPTIONS=""
 if [ "$INPUT_COPY_STACK_FILE" == "true" ]; then
   STACK_FILE="$INPUT_DEPLOY_PATH/$STACK_FILE"
 else
-  DEPLOYMENT_COMMAND_OPTIONS=" --log-level debug --host ssh://$INPUT_REMOTE_DOCKER_HOST"
+  DEPLOYMENT_COMMAND_OPTIONS="$INPUT_DEPLOYMENT_COMMAND_OPTIONS --log-level debug --host ssh://$INPUT_REMOTE_DOCKER_HOST"
 fi
 
 case $INPUT_DEPLOYMENT_MODE in
@@ -104,6 +104,10 @@ if ! [ -z "$INPUT_COPY_STACK_FILE" ] && [ $INPUT_COPY_STACK_FILE = 'true' ] ; th
 
   execute_ssh ${DEPLOYMENT_COMMAND} "$INPUT_ARGS" 2>&1
 else
+
+  if ! [ -z "$INPUT_PRE_DEPLOYMENT_COMMAND_ARGS" ] && [ $INPUT_DEPLOYMENT_MODE = 'docker-compose' ] ; then
+    execute_ssh "${DEPLOYMENT_COMMAND}  $INPUT_PRE_DEPLOYMENT_COMMAND_ARGS" 2>&1
+  fi
 
   if ! [ -z "$INPUT_PULL_IMAGES_FIRST" ] && [ $INPUT_PULL_IMAGES_FIRST = 'true' ] && [ $INPUT_DEPLOYMENT_MODE = 'docker-compose' ] ; then
     execute_ssh "${DEPLOYMENT_COMMAND} pull --ignore-pull-failures"
