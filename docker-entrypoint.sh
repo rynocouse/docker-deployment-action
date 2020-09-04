@@ -36,7 +36,7 @@ if [ -z "$INPUT_STACK_FILE_NAME" ]; then
   INPUT_STACK_FILE_NAME=docker-compose.yaml
 fi
 
-if [ -z "$INPUT_STACK_FILE_NAME" ]; then
+if [ -z "$INPUT_DEPLOYMENT_COMMAND_OPTIONS" ]; then
   INPUT_DEPLOYMENT_COMMAND_OPTIONS=""
 fi
 
